@@ -1,0 +1,22 @@
+.\objects\spi.o: HW\SPI.c
+.\objects\spi.o: HW\SPI.h
+.\objects\spi.o: .\SYS\SysTick.h
+.\objects\spi.o: .\SYS\system.h
+.\objects\spi.o: .\USER\stm32f4xx.h
+.\objects\spi.o: .\libraries\CMSIS\core_cm4.h
+.\objects\spi.o: D:\Keil MDK\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\spi.o: .\libraries\CMSIS\core_cmInstr.h
+.\objects\spi.o: .\libraries\CMSIS\core_cmFunc.h
+.\objects\spi.o: .\libraries\CMSIS\core_cmSimd.h
+.\objects\spi.o: .\libraries\CMSIS\system_stm32f4xx.h
+.\objects\spi.o: .\USER\stm32f4xx_conf.h
+.\objects\spi.o: .\libraries\BSP_Driver\inc\stm32f4xx_dma.h
+.\objects\spi.o: .\USER\stm32f4xx.h
+.\objects\spi.o: .\libraries\BSP_Driver\inc\stm32f4xx_flash.h
+.\objects\spi.o: .\libraries\BSP_Driver\inc\stm32f4xx_gpio.h
+.\objects\spi.o: .\libraries\BSP_Driver\inc\stm32f4xx_i2c.h
+.\objects\spi.o: .\libraries\BSP_Driver\inc\stm32f4xx_rcc.h
+.\objects\spi.o: .\libraries\BSP_Driver\inc\stm32f4xx_rtc.h
+.\objects\spi.o: .\libraries\BSP_Driver\inc\stm32f4xx_spi.h
+.\objects\spi.o: .\libraries\BSP_Driver\inc\stm32f4xx_usart.h
+.\objects\spi.o: .\libraries\BSP_Driver\inc\misc.h

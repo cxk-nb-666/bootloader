@@ -1,0 +1,21 @@
+.\objects\systick.o: SYS\SysTick.c
+.\objects\systick.o: SYS\SysTick.h
+.\objects\systick.o: SYS\system.h
+.\objects\systick.o: .\USER\stm32f4xx.h
+.\objects\systick.o: .\libraries\CMSIS\core_cm4.h
+.\objects\systick.o: D:\Keil MDK\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\systick.o: .\libraries\CMSIS\core_cmInstr.h
+.\objects\systick.o: .\libraries\CMSIS\core_cmFunc.h
+.\objects\systick.o: .\libraries\CMSIS\core_cmSimd.h
+.\objects\systick.o: .\libraries\CMSIS\system_stm32f4xx.h
+.\objects\systick.o: .\USER\stm32f4xx_conf.h
+.\objects\systick.o: .\libraries\BSP_Driver\inc\stm32f4xx_dma.h
+.\objects\systick.o: .\USER\stm32f4xx.h
+.\objects\systick.o: .\libraries\BSP_Driver\inc\stm32f4xx_flash.h
+.\objects\systick.o: .\libraries\BSP_Driver\inc\stm32f4xx_gpio.h
+.\objects\systick.o: .\libraries\BSP_Driver\inc\stm32f4xx_i2c.h
+.\objects\systick.o: .\libraries\BSP_Driver\inc\stm32f4xx_rcc.h
+.\objects\systick.o: .\libraries\BSP_Driver\inc\stm32f4xx_rtc.h
+.\objects\systick.o: .\libraries\BSP_Driver\inc\stm32f4xx_spi.h
+.\objects\systick.o: .\libraries\BSP_Driver\inc\stm32f4xx_usart.h
+.\objects\systick.o: .\libraries\BSP_Driver\inc\misc.h

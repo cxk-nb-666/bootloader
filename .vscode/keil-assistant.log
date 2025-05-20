@@ -1,0 +1,64 @@
+[info] Log at : 2025/5/8|16:52:05|GMT+0800
+
+SyntaxError: Unexpected token ']', ..."   },
+    ],
+    "ve"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at F.updateCppProperties (c:\Users\脖子里的小猫\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:10849)
+    at F.<anonymous> (c:\Users\脖子里的小猫\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:12579)
+    at Generator.next (<anonymous>)
+    at c:\Users\脖子里的小猫\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:4480
+    at new Promise (<anonymous>)
+    at r (c:\Users\脖子里的小猫\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:4225)
+    at F.load (c:\Users\脖子里的小猫\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:11310)
+    at w.<anonymous> (c:\Users\脖子里的小猫\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:8737)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\脖子里的小猫\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:4282)
+[info] Log at : 2025/5/8|16:56:58|GMT+0800
+
+[info] Log at : 2025/5/8|16:57:32|GMT+0800
+
+[info] Log at : 2025/5/10|12:24:17|GMT+0800
+
+[info] Log at : 2025/5/10|12:39:58|GMT+0800
+
+[info] Log at : 2025/5/10|12:54:22|GMT+0800
+
+[info] Log at : 2025/5/10|12:58:24|GMT+0800
+
+[info] Log at : 2025/5/12|16:23:12|GMT+0800
+
+[info] Log at : 2025/5/12|18:23:24|GMT+0800
+
+[info] Log at : 2025/5/12|19:26:14|GMT+0800
+
+[info] Log at : 2025/5/12|19:26:50|GMT+0800
+
+[info] Log at : 2025/5/13|22:55:45|GMT+0800
+
+[info] Log at : 2025/5/14|19:09:06|GMT+0800
+
+[info] Log at : 2025/5/14|19:18:47|GMT+0800
+
+[info] Log at : 2025/5/14|19:24:12|GMT+0800
+
+[info] Log at : 2025/5/14|19:27:47|GMT+0800
+
+[info] Log at : 2025/5/14|19:35:44|GMT+0800
+
+[info] Log at : 2025/5/14|22:57:01|GMT+0800
+
+[info] Log at : 2025/5/14|22:57:40|GMT+0800
+
+[info] Log at : 2025/5/17|21:11:17|GMT+0800
+
+[info] Log at : 2025/5/18|15:28:41|GMT+0800
+
+[info] Log at : 2025/5/18|17:21:56|GMT+0800
+
+[info] Log at : 2025/5/18|17:24:24|GMT+0800
+
+[info] Log at : 2025/5/18|20:07:57|GMT+0800
+
+[info] Log at : 2025/5/18|20:13:26|GMT+0800
+
