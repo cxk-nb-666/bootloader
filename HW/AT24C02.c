@@ -1,4 +1,6 @@
 #include "AT24C02.h"
+#include "main.h"
+#include "string.h"
 
 void AT24C02_Init(void){
     EEPROM_I2CInit();
@@ -70,7 +72,10 @@ uint8_t AT24C02_ReadBytes(uint16_t RegAddr,uint8_t *data,uint16_t length){
     return 0;
 }
 
-
+void AT24C02_Read_OTA_Info(void){
+    memset(&OTA_Info,0,OTA_InfoCB_SIZE);
+    AT24C02_ReadBytes(0,(uint8_t*)&OTA_Info,OTA_InfoCB_SIZE);
+}
 
 
 

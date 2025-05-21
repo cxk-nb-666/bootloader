@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "f:/STM32HUA/bootloader/HW",
-      "program": "f:/STM32HUA/bootloader/HW/build/Debug/outDebug",
+      "cwd": "f:/STM32HUA/bootloader/USER",
+      "program": "f:/STM32HUA/bootloader/USER/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

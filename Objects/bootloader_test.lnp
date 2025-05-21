@@ -19,6 +19,7 @@
 ".\objects\spi.o"
 ".\objects\w25q128.o"
 ".\objects\fmc.o"
+".\objects\boot.o"
 ".\objects\startup_stm32f40_41xxx.o"
 ".\objects\system_stm32f4xx.o"
 --library_type=microlib --strict --scatter ".\Objects\bootloader_test.sct"

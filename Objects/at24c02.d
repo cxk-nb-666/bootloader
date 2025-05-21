@@ -21,3 +21,5 @@
 .\objects\at24c02.o: .\libraries\BSP_Driver\inc\misc.h
 .\objects\at24c02.o: .\SYS\SysTick.h
 .\objects\at24c02.o: .\SYS\system.h
+.\objects\at24c02.o: .\USER\main.h
+.\objects\at24c02.o: D:\Keil MDK\ARM\ARMCC\Bin\..\include\string.h

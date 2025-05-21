@@ -26,3 +26,5 @@
 .\objects\main.o: .\HW\AT24C02.h
 .\objects\main.o: .\HW\IIC.h
 .\objects\main.o: .\HW\fmc.h
+.\objects\main.o: USER\main.h
+.\objects\main.o: .\HW\boot.h

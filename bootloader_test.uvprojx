@@ -513,6 +513,11 @@
               <FileType>1</FileType>
               <FilePath>.\HW\fmc.c</FilePath>
             </File>
+            <File>
+              <FileName>boot.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HW\boot.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

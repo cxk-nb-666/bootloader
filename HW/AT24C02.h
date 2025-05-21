@@ -15,7 +15,7 @@ uint8_t AT24C02_WriteByte( uint8_t RegAddr,uint8_t data);
 uint8_t AT24C02_WritePage( uint8_t RegAddr,uint8_t *data,uint8_t length);
 uint8_t AT24C02_ReadByte( uint16_t RegAddr);
 uint8_t AT24C02_ReadBytes( uint16_t RegAddr,uint8_t *data,uint16_t length);
-
+void AT24C02_Read_OTA_Info(void);
 
 
 #endif // _AT24C02_H
