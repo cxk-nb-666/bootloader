@@ -3,6 +3,7 @@
 #include "usart.h"
 #include "AT24C02.h"
 #include "fmc.h"
+#include "main.h"
 
 uint32_t wbuff[1024];
 

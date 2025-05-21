@@ -403,6 +403,11 @@
               <FileType>5</FileType>
               <FilePath>.\USER\stm32f4xx_conf.h</FilePath>
             </File>
+            <File>
+              <FileName>main.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\main.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

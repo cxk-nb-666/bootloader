@@ -60,6 +60,7 @@
     "spi.h": "c",
     "systick.h": "c",
     "system.h": "c",
-    "fmc.h": "c"
+    "fmc.h": "c",
+    "main.h": "c"
   }
 }
