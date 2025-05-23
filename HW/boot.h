@@ -15,6 +15,10 @@ void BootLoader_Branch(void);    // Bootloader分支判断函数
 __asm void MSR_SP(uint32_t Addr); // 设置主堆栈指针的汇编函数
 void LOAD_A(uint32_t Addr);      // 加载并跳转到应用程序
 void BootLoader_Clear(void);     // 清理Bootloader使用的外设
+uint8_t BootLoader_Enter(uint8_t time);
+void BootLoader_Info(void);
+
+
 
 #endif
 

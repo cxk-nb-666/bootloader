@@ -161,18 +161,6 @@ void SysTick_Handler(void)
 
 void USART1_IRQHandler(void)
 {
-  /*
-    if(USART_GetITStatus(USART1, USART_IT_IDLE) != RESET)
-    {
-        //接收数据
-        uint8_t data = USART_ReceiveData(USART1);
-        //将接收到的数据存入缓冲区
-        USART_SendData(USART1, data);
-        USART_ReceiveData(USART1);
-        USART_ClearITPendingBit(USART1, USART_IT_RXNE); //清除中断标志位
-    }
-  */
-
     if(USART_GetFlagStatus(USART1,USART_FLAG_IDLE) != RESET)
     {
       USART_ClearFlag(USART1,USART_FLAG_IDLE); //清除中断标志位
@@ -191,7 +179,7 @@ void USART1_IRQHandler(void)
       }else{
           U1_RXBufptr.U1RXDataIN->start = &USART1_RxBuffer[U1_RXBufptr.U1RxCount];
       }
-       
+      
       DMA_Cmd(DMA2_Stream5,DISABLE); //关闭DMA接收
       DMA2_Stream5->M0AR = (uint32_t)U1_RXBufptr.U1RXDataIN->start;  // 设置内存地址（接收缓冲区）
       DMA_SetCurrDataCounter(DMA2_Stream5,U1_RX_MAX+1); //设置接收数据的长度

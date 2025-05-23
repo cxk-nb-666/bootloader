@@ -18,16 +18,15 @@ uint8_t AT24C02_WriteByte(uint8_t RegAddr,uint8_t data){
     return 0;
 }
 
-uint8_t AT24C02_WritePage(uint8_t RegAddr,uint8_t *data,uint8_t length){
-    if(length>AT24C02_MAX_WRITE_SIZE) return 1;
+uint8_t AT24C02_WritePage(uint8_t RegAddr,uint8_t *data){
     IIC_Start();
     IIC_SendByte(AT24C02_ADDRESS);
-    if(IIC_WaitAck(100)) return 2;
+    if(IIC_WaitAck(100)) return 1;
     IIC_SendByte(RegAddr);
-    if(IIC_WaitAck(100)) return 3;
-    for(uint8_t i=0;i<length;i++){
+    if(IIC_WaitAck(100)) return 2;
+    for(uint8_t i=0;i<8;i++){
         IIC_SendByte(data[i]);
-        if(IIC_WaitAck(100)) return 4;
+        if(IIC_WaitAck(100)) return 3;
     }
     IIC_Stop();
     return 0;
@@ -78,7 +77,14 @@ void AT24C02_Read_OTA_Info(void){
 }
 
 
-
+void AT24C02_Write_OTA_Info(void){
+    uint8_t *wptr;
+    wptr = (uint8_t *)&OTA_Info;
+    for(uint8_t i=0;i<OTA_InfoCB_SIZE/8;i++){
+        AT24C02_WritePage(i*8,wptr+i*8);
+        delay_ms(10);
+    }
+}
 
 
 
