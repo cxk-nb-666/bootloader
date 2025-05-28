@@ -32,7 +32,7 @@ typedef struct{
 }U1_ptr_RX_Buffptr_Node;
 
 
-extern uint8_t USART1_RxBuffer[];
+extern uint8_t USART1_RxBuffer[U1_RX_BUFFER_SIZE];
 extern U1_ptr_RX_Buffptr_Node U1_RXBufptr;
 
 void Usart1_Init(uint32_t bandrate);

@@ -20,3 +20,7 @@
 .\objects\fmc.o: .\libraries\BSP_Driver\inc\stm32f4xx_spi.h
 .\objects\fmc.o: .\libraries\BSP_Driver\inc\stm32f4xx_usart.h
 .\objects\fmc.o: .\libraries\BSP_Driver\inc\misc.h
+.\objects\fmc.o: HW\usart.h
+.\objects\fmc.o: D:\Keil MDK\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\fmc.o: D:\Keil MDK\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\fmc.o: D:\Keil MDK\ARM\ARMCC\Bin\..\include\string.h

@@ -1,17 +1,7 @@
 {
   "files.associations": {
-    "boot.h": "c",
-    "atomic": "c",
-    "main.h": "c",
-    "cstdint": "c",
-    "random": "c",
-    "at24c02.h": "c",
-    "w25q128.h": "c",
     "usart.h": "c",
-    "array": "c",
-    "string": "c",
-    "string_view": "c",
-    "span": "c"
+    "fmc.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",

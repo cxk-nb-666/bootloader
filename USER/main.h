@@ -11,13 +11,16 @@
 // Bootloader和应用程序分区定义
 #define STM32_B_sector_num 4                  // Bootloader占用扇区数
 #define STM32_A_sector_num STM32_sector_Num-STM32_B_sector_num  // 应用程序占用扇区数
-#define STM32_A_Start_Sector STM32_B_sector_num+1               // 应用程序起始扇区
+#define STM32_A_Start_Sector STM32_B_sector_num               // 应用程序起始扇区
 #define STM32_A_Start_Addr (uint32_t)(STM32_FLASH_BASE+(STM32_0_3_sector_size*STM32_B_sector_num))
 //#define STM32_A_Start_Addr 0x08010000        // 应用程序起始地址：0x08010000
 #define OTA_SET_FLAG 0x11223344              // OTA更新标志值
 
-// 应用程序更新标志位
-#define UpDataA_Flag 0x00000001
+
+#define UpDataA_Flag 0x00000001             // 应用程序更新标志位
+#define IAP_Xmodem_Flag 0x00000002          // IAP Xmodem标志位
+#define IAP_Xmodem_Data 0x00000004          // IAP Xmodem数据标志位
+
 
 // OTA信息控制块结构体定义
 typedef struct{
@@ -31,7 +34,12 @@ typedef struct{
 typedef struct{
     uint8_t UpDataA_Buf[1024];     // 更新缓冲区，用于临时存储从W25Q128读取的数据
     uint32_t W25Q64_BlockNumber;   // W25Q64块号，指示当前操作的存储块
+    uint32_t Xmodem_timer;         //记录接收数据的时间
+    uint32_t Xmodem_RecvNum;       //记录接收了多少个数据包
+    uint32_t XmodemCRC;            //用于计算的CRC值
 }UpDataA_CB;
+
+
 
 
 // 外部声明OTA信息变量

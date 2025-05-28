@@ -42,7 +42,7 @@ void Usart1_Init(uint32_t bandrate){
     USART_Cmd(USART1,ENABLE);  // 使能USART1
     // 空闲中断，因为是OTA升级，要在空闲的时候进行升级
     USART_ITConfig(USART1,USART_IT_IDLE,ENABLE);  // 使能空闲中断
-    USART_ITConfig(USART1,USART_IT_RXNE,ENABLE);  // 使能接收中断
+    //USART_ITConfig(USART1,USART_IT_RXNE,ENABLE);  // 使能接收中断
     // 优先级配置
     NVIC_InitTypeDef NVIC_InitStructure;
     NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;  // USART1中断通道
@@ -55,7 +55,7 @@ void Usart1_Init(uint32_t bandrate){
     U1Rx_PrtInit();     // 初始化接收缓冲区指针
 
     // 清除中断标志，防止初始化后立即进入中断
-    //USART_ClearITPendingBit(USART1,USART_IT_IDLE);
+    USART_ClearITPendingBit(USART1,USART_IT_IDLE);
     USART_ClearFlag(USART1,USART_FLAG_IDLE);
 }
 
@@ -81,7 +81,7 @@ void USART1_DMA_Init(void){
     DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)USART1_RxBuffer;//内存地址
     DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;//内存地址递增
     DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;//单次传输的数据大小
-    DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;//普通模式
+    DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;//循环模式
     DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&USART1->DR;//外设地址
     DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;//单次传输的数据大小
     DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;//外设地址不递增
@@ -123,7 +123,7 @@ void U1_printf(char *format,...){
         while(USART_GetFlagStatus(USART1,USART_FLAG_TXE) == RESET);
         USART_SendData(USART1,USART1_TxBuffer[i]);
     }
-    while(USART_GetFlagStatus(USART1,USART_FLAG_TC)==RESET);  // 等待发送完成
+    while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);  // 等待发送完成
 
 }
 
