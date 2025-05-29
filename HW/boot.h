@@ -7,6 +7,7 @@
 #include "fmc.h"        // Flash存储器控制相关
 #include "main.h"       // 主要配置和定义
 #include "stdio.h"      // 标准输入输出库
+#include "W25Q128.h"    
 
 // 定义函数指针类型，用于跳转到应用程序
 typedef void (*load_a)(void);

@@ -1,7 +1,13 @@
 {
   "files.associations": {
     "usart.h": "c",
-    "fmc.h": "c"
+    "fmc.h": "c",
+    "array": "c",
+    "string": "c",
+    "string_view": "c",
+    "span": "c",
+    "boot.h": "c",
+    "w25q128.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",

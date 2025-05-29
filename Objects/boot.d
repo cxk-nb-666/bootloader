@@ -28,3 +28,5 @@
 .\objects\boot.o: .\SYS\system.h
 .\objects\boot.o: HW\fmc.h
 .\objects\boot.o: .\USER\main.h
+.\objects\boot.o: HW\W25Q128.h
+.\objects\boot.o: HW\SPI.h

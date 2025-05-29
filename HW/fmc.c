@@ -70,11 +70,6 @@ void FLASH_Erase(uint8_t start, uint8_t count){
  */
 void FLASH_Write(uint32_t Addr, uint8_t *data, uint32_t count){
     FLASH_Unlock();  // 解锁Flash
-    /*
-    for(uint32_t i=0; i<count; i++){
-        FLASH_ProgramWord(Addr + i*4, data[i]);  
-    }
-    */
    /*
     while(count){
         FLASH_ProgramWord(Addr, *data);

@@ -19,14 +19,16 @@ void BootLoader_Branch(void)
         {
             U1_printf("OTA事件\r\n");       // 打印OTA事件信息
             BootStatusFlag |= UpDataA_Flag; // 设置更新标志
-            UpDataA.W25Q64_BlockNumber = 0; 
+            UpDataA.W25Q64_BlockNumber = 0;
         }
         else
         {
             U1_printf("跳转APP\r\n");   // 打印跳转APP信息
             LOAD_A(STM32_A_Start_Addr); // 跳转到应用程序起始地址
         }
-    }else{
+    }
+    else
+    {
         U1_printf("进入BootLoader\r\n"); // 打印进入BootLoader信息
         BootLoader_Info();
     }
@@ -78,25 +80,32 @@ void BootLoader_Event(uint8_t *data, uint8_t datalen)
         }
         else if ((data[0] == '3') && (datalen == 1))
         {
+            U1_printf("请设置OTA版本号，格式为VERSION-V1.0-2025-05-029-11:38\r\n");
+            BootStatusFlag |= IAP_SET_OTA_VRESION;
         }
         else if ((data[0] == '4') && (datalen == 1))
         {
+            BootStatusFlag |= IAP_GET_OTA_VRESION;
+            U1_printf("当前版本号为:%s\r\n", OTA_Info.OTA_Version);
         }
         else if ((data[0] == '5') && (datalen == 1))
         {
+            BootStatusFlag |= (IAP_DOWNLOAD_TO_OUT_FLASH|IAP_Xmodem_Flag);
+            U1_printf("请输入要下载到的FLASH块号:1~9\r\n");
         }
         else if ((data[0] == '6') && (datalen == 1))
         {
+            BootStatusFlag |= IAP_USE_OTA;
         }
         else if ((data[0] == '7') && (datalen == 1))
         {
             U1_printf("即将重启\r\n");
             delay_ms(1000);
-            NVIC_SystemReset();//复位
+            NVIC_SystemReset(); // 复位
         }
     }
 
-    if (BootStatusFlag & IAP_Xmodem_Data)
+    if (BootStatusFlag & IAP_Xmodem_Data) // 串口IAP下载A区程序
     {
         if (data[0] == 0x01 && datalen == 133)
         {
@@ -104,30 +113,127 @@ void BootLoader_Event(uint8_t *data, uint8_t datalen)
             UpDataA.XmodemCRC = Xmodem_CRC16(&data[3], 128);
             if (UpDataA.XmodemCRC == (data[131] * 256 + data[132]))
             {
-                UpDataA.Xmodem_RecvNum++;//收到一个数据包
-                memcpy(&UpDataA.UpDataA_Buf[((UpDataA.Xmodem_RecvNum-1)%8)*128], &data[3], 128);//copy到缓冲区中
-                if(UpDataA.Xmodem_RecvNum%8==0){//收到8个数据包就写入flash
-                    FLASH_Write(STM32_A_Start_Addr + (UpDataA.Xmodem_RecvNum/8-1)*1024, UpDataA.UpDataA_Buf, 1024);
+                UpDataA.Xmodem_RecvNum++;                                                              // 收到一个数据包
+                memcpy(&UpDataA.UpDataA_Buf[((UpDataA.Xmodem_RecvNum - 1) % 8) * 128], &data[3], 128); // copy到缓冲区中
+                if (UpDataA.Xmodem_RecvNum % 8 == 0)    // 收到8个数据包就写入flash
+                { 
+                    FLASH_Write(STM32_A_Start_Addr + (UpDataA.Xmodem_RecvNum / 8 - 1) * 1024, UpDataA.UpDataA_Buf, 1024);
                 }
-                U1_printf("\x06");//ACK
+                U1_printf("\x06"); // ACK
             }
             else
             {
-                U1_printf("\x15");//NOT ACK
+                U1_printf("\x15"); // NOT ACK
             }
         }
-        if(data[0] == 0x04 && datalen == 1){//接收到EOF
-            U1_printf("\x06");//应答
-            if(UpDataA.Xmodem_RecvNum%8!=0){//处理不足1024个字节的数据包
-                FLASH_Write(STM32_A_Start_Addr + (UpDataA.Xmodem_RecvNum/8)*1024, UpDataA.UpDataA_Buf, (UpDataA.Xmodem_RecvNum%8)*128);
+        if (data[0] == 0x04 && datalen == 1)
+        {                      // 接收到EOF
+            U1_printf("\x06"); // 应答
+            if (UpDataA.Xmodem_RecvNum % 8 != 0)    // 处理不足1024个字节的数据包
+            { 
+                FLASH_Write(STM32_A_Start_Addr + (UpDataA.Xmodem_RecvNum / 8) * 1024, UpDataA.UpDataA_Buf, (UpDataA.Xmodem_RecvNum % 8) * 128);
             }
             BootStatusFlag &= ~IAP_Xmodem_Data;
             delay_ms(1000);
-            NVIC_SystemReset();//复位
+            NVIC_SystemReset(); // 复位
+        }
+    }
+    else if (BootStatusFlag & IAP_SET_OTA_VRESION) // 设置OTA版本号
+    {
+        uint8_t temp = 0;
+        if (datalen == 28)
+        {
+            //检查字母格式
+            if (data[0] == 'V' && data[1] == 'E' && data[2] == 'R' && data[3] == 'S' 
+                && data[4] == 'I' && data[5] == 'O' && data[6] == 'N' && data[7] == '-')
+            {
+                //对比格式，如果7个格式都正确，就设置版本号
+                if (sscanf((char *)data, "VERSION-V%d.%d-20%d-%d-%d-%d:%d", &temp, &temp, &temp, &temp, &temp, &temp, &temp) == 7)
+                {
+                    memcpy(&OTA_Info.OTA_Version, &data[0], 28);
+                    AT24C02_Write_OTA_Info();
+                    U1_printf("设置成功\r\n");
+                    BootStatusFlag &= ~IAP_SET_OTA_VRESION;
+                    BootLoader_Info();
+                }
+                else
+                {
+                    U1_printf("格式错误\r\n");
+                }
+            }
+            else
+            {
+                U1_printf("字母错误\r\n");
+            }
+        }
+        else
+        {
+            U1_printf("长度错误\r\n");
+        }
+    }
+    else if (BootStatusFlag & IAP_DOWNLOAD_TO_OUT_FLASH)// 向外部Flash下载程序
+    {
+        //判断输入的块号是否合法
+        if ((data[0] >= 0x31) && (data[0] <= 0x39) && (datalen == 1))
+        {
+            UpDataA.W25Q64_BlockNumber = data[0] - '0';
+            if (data[0] == 0x01 && datalen == 133)
+            {
+                BootStatusFlag &= ~IAP_Xmodem_Flag;
+                UpDataA.XmodemCRC = Xmodem_CRC16(&data[3], 128);
+                if (UpDataA.XmodemCRC == (data[131] * 256 + data[132]))
+                {
+                    UpDataA.Xmodem_RecvNum++;
+                    OTA_Info.FireLen[UpDataA.W25Q64_BlockNumber+1] += 128;                                   // 收到一个数据包
+                    memcpy(&UpDataA.UpDataA_Buf[((UpDataA.Xmodem_RecvNum - 1) % 2) * 128], &data[3], 128); // copy到缓冲区中
+                    if (UpDataA.Xmodem_RecvNum % 2 == 0)
+                    {
+                        W25Q128_Erase64K(UpDataA.W25Q64_BlockNumber);
+                        W25Q128_PageProgram(UpDataA.UpDataA_Buf, UpDataA.W25Q64_BlockNumber * 64 * 1024 + 256 * UpDataA.Xmodem_RecvNum / 2);
+                        U1_printf("\x06"); // ACK
+                    }
+                    else
+                    {
+                        U1_printf("\x15"); // NOT ACK
+                    }
+                }
+            }
+            if (data[0] == 0x04 && datalen == 1)
+            {                      // 接收到EOF
+                U1_printf("\x06"); // 应答
+                if (UpDataA.Xmodem_RecvNum % 2 != 0)
+                {
+                    W25Q128_PageProgram(UpDataA.UpDataA_Buf, UpDataA.W25Q64_BlockNumber * 64 * 1024 + 256 * UpDataA.Xmodem_RecvNum / 2);
+                }
+                BootStatusFlag &= ~IAP_DOWNLOAD_TO_OUT_FLASH;
+                U1_printf("下载完成\r\n");
+                BootLoader_Info();
+            }
+        }
+    }
+    else if (BootStatusFlag & IAP_USE_OTA)
+    {
+        uint32_t i;
+        U1_printf("请输入块号(1~9)，以使用当中的程序\r\n");
+        if ((data[0] >= '1') && (data[0] <= '9') && (datalen == 1))
+        {
+            U1_printf("即将使用块号为%d的程序\r\n", data[0] - '0');
+            for (i = 0; i < OTA_Info.FireLen[UpDataA.W25Q64_BlockNumber + 1] / 1024; i++)
+            {
+                W25Q128_ReadData(UpDataA.W25Q64_BlockNumber * 64 * 1024 + i * 1024, UpDataA.UpDataA_Buf, 1024);
+                FLASH_Write(STM32_A_Start_Addr + i * 1024, UpDataA.UpDataA_Buf, 1024);
+            }
+            if (OTA_Info.FireLen[UpDataA.W25Q64_BlockNumber + 1] % 1024 != 0)
+            {
+                W25Q128_ReadData(UpDataA.W25Q64_BlockNumber * 64 * 1024 + i * 1024, UpDataA.UpDataA_Buf, OTA_Info.FireLen[UpDataA.W25Q64_BlockNumber + 1] % 1024);
+                FLASH_Write(STM32_A_Start_Addr + i * 1024, UpDataA.UpDataA_Buf, OTA_Info.FireLen[UpDataA.W25Q64_BlockNumber + 1] % 1024);
+            }
+            U1_printf("写入完成\r\n");
+            BootStatusFlag &= ~IAP_USE_OTA;
+            BootLoader_Info();
         }
     }
 }
-
 /**
  * @brief  设置主堆栈指针的汇编函数
  * @note   使用汇编指令直接设置MSP寄存器
@@ -138,8 +244,7 @@ __asm void MSR_SP(uint32_t Addr)
 {
 
     MSR MSP, r0         // 将r0寄存器的值(Addr)加载到MSP寄存器
-    BX r14 // 返回调用函数
-
+                 BX r14 // 返回调用函数
 }
 
 /**
@@ -154,7 +259,7 @@ void LOAD_A(uint32_t Addr)
     if ((*(uint32_t *)Addr >= 0x20000000) && (*(uint32_t *)Addr <= (0x20000000 + 0x20000 - 1)))
     {
         MSR_SP(*(uint32_t *)Addr);                  // 设置主堆栈指针
-        Load_A = (load_a)*(uint32_t *)(Addr + 4); // 获取复位向量(应用程序入口点)
+        Load_A = (load_a) * (uint32_t *)(Addr + 4); // 获取复位向量(应用程序入口点)
         Load_A();                                   // 跳转到应用程序
     }
     else

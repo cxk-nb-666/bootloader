@@ -87,7 +87,7 @@ void W25Q128_Erase64K(uint8_t BlockNumber){
  * @param  PageNumber: 页号
  * @retval 无
  */
-void W25Q128_PageProgram(uint8_t *wbuff ,uint8_t PageNumber){
+void W25Q128_PageProgram(uint8_t *wbuff ,uint32_t PageNumber){
     uint8_t wdata[4]={0};
 
     // 准备页编程命令和地址
