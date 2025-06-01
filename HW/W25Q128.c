@@ -68,10 +68,9 @@ void W25Q128_Erase64K(uint8_t BlockNumber){
 
     // 准备擦除命令和地址
     wdata[0] = 0xD8;                                // 64K块擦除命令
-    wdata[1] = (BlockNumber * 128 * 1024) >> 16;   // 地址高字节
-    wdata[2] = (BlockNumber * 128 * 1024) >> 8;    // 地址中字节
-    wdata[3] = (BlockNumber * 128 * 1024) >> 0;    // 地址低字节
-
+    wdata[1] = (BlockNumber * 64 * 1024) >> 16;   // 地址高字节
+    wdata[2] = (BlockNumber * 64 * 1024) >> 8;    // 地址中字节
+    wdata[3] = (BlockNumber * 64 * 1024) >> 0;    // 地址低字节
     W25Q128_WaitBusy();    // 等待Flash空闲
     W25Q128_Enable();      // 使能写操作
     CS_L;                  // 使能片选
@@ -91,11 +90,10 @@ void W25Q128_PageProgram(uint8_t *wbuff ,uint32_t PageNumber){
     uint8_t wdata[4]={0};
 
     // 准备页编程命令和地址
-    wdata[0] = 0x02;                                // 页编程命令
-    wdata[1] = (PageNumber * 128 * 1024) >> 16;    // 地址高字节
-    wdata[2] = (PageNumber * 128 * 1024) >> 8;     // 地址中字节
-    wdata[3] = (PageNumber * 128 * 1024) >> 0;     // 地址低字节
-
+    wdata[0] = 0x02;                        // 页编程命令
+    wdata[1] = (PageNumber * 256) >> 16;    // 地址高字节
+    wdata[2] = (PageNumber * 256) >> 8;     // 地址中字节
+    wdata[3] = (PageNumber * 256) >> 0;     // 地址低字节
     W25Q128_WaitBusy();        // 等待Flash空闲
     W25Q128_Enable();          // 使能写操作
     CS_L;                      // 使能片选

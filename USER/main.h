@@ -23,7 +23,7 @@
 #define IAP_GET_OTA_VRESION 0x00000010       // 获取OTA版本号标志位
 #define IAP_DOWNLOAD_TO_OUT_FLASH 0x00000020 // 下载OTA固件标志位
 #define IAP_USE_OTA 0x00000040               // 使用OTA固件标志位
-
+#define IAP_FLASH_Xmodem_Flag 0x00000080    // Flash Xmodem标志位
 // OTA信息控制块结构体定义
 typedef struct
 {
@@ -38,7 +38,7 @@ typedef struct
 {
     uint8_t UpDataA_Buf[1024];   // 更新缓冲区，用于临时存储从W25Q128读取的数据
     uint32_t W25Q64_BlockNumber; // W25Q64块号，指示当前操作的存储块
-    uint32_t Xmodem_timer;       // 记录接收数据的时间
+    uint32_t Xmodem_timer;       // 发送C的定时器
     uint32_t Xmodem_RecvNum;     // 记录接收了多少个数据包
     uint32_t XmodemCRC;          // 用于计算的CRC值
 } UpDataA_CB;

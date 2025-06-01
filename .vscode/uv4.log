@@ -1,23 +1,25 @@
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil MDK\ARM\ARMCC\Bin'
 Build target 'Target 1'
+compiling W25Q128.c...
+compiling main.c...
 compiling boot.c...
-HW\boot.c(149): warning:  #181-D: argument is incompatible with corresponding format string conversion
+HW\boot.c(185): warning:  #181-D: argument is incompatible with corresponding format string conversion
                   if (sscanf((char *)data, "VERSION-V%d.%d-20%d-%d-%d-%d:%d", &temp, &temp, &temp, &temp, &temp, &temp, &temp) == 7)
-HW\boot.c(149): warning:  #181-D: argument is incompatible with corresponding format string conversion
+HW\boot.c(185): warning:  #181-D: argument is incompatible with corresponding format string conversion
                   if (sscanf((char *)data, "VERSION-V%d.%d-20%d-%d-%d-%d:%d", &temp, &temp, &temp, &temp, &temp, &temp, &temp) == 7)
-HW\boot.c(149): warning:  #181-D: argument is incompatible with corresponding format string conversion
+HW\boot.c(185): warning:  #181-D: argument is incompatible with corresponding format string conversion
                   if (sscanf((char *)data, "VERSION-V%d.%d-20%d-%d-%d-%d:%d", &temp, &temp, &temp, &temp, &temp, &temp, &temp) == 7)
-HW\boot.c(149): warning:  #181-D: argument is incompatible with corresponding format string conversion
+HW\boot.c(185): warning:  #181-D: argument is incompatible with corresponding format string conversion
                   if (sscanf((char *)data, "VERSION-V%d.%d-20%d-%d-%d-%d:%d", &temp, &temp, &temp, &temp, &temp, &temp, &temp) == 7)
-HW\boot.c(149): warning:  #181-D: argument is incompatible with corresponding format string conversion
+HW\boot.c(185): warning:  #181-D: argument is incompatible with corresponding format string conversion
                   if (sscanf((char *)data, "VERSION-V%d.%d-20%d-%d-%d-%d:%d", &temp, &temp, &temp, &temp, &temp, &temp, &temp) == 7)
-HW\boot.c(149): warning:  #181-D: argument is incompatible with corresponding format string conversion
+HW\boot.c(185): warning:  #181-D: argument is incompatible with corresponding format string conversion
                   if (sscanf((char *)data, "VERSION-V%d.%d-20%d-%d-%d-%d:%d", &temp, &temp, &temp, &temp, &temp, &temp, &temp) == 7)
-HW\boot.c(149): warning:  #181-D: argument is incompatible with corresponding format string conversion
+HW\boot.c(185): warning:  #181-D: argument is incompatible with corresponding format string conversion
                   if (sscanf((char *)data, "VERSION-V%d.%d-20%d-%d-%d-%d:%d", &temp, &temp, &temp, &temp, &temp, &temp, &temp) == 7)
 HW\boot.c: 7 warnings, 0 errors
 linking...
-Program Size: Code=12692 RO-data=624 RW-data=28 ZI-data=6340  
+Program Size: Code=13208 RO-data=624 RW-data=28 ZI-data=6340  
 FromELF: creating hex file...
 ".\Objects\bootloader_test.axf" - 0 Error(s), 7 Warning(s).
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:02
